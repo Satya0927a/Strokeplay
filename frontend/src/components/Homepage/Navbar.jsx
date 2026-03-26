@@ -32,7 +32,7 @@ const Navbar = ({ scrolled, mobileOpen, setMobileOpen }) => {
 
           {/* Desktop Links */}
           <div className="desktop-nav flex items-center gap-9">
-            {["Home", "Features", "Pricing", "Charities", "About"].map((l, a) => {
+            {["Home", "Pricing"].map((l, a) => {
               if (l == "Home") {
                 return <a key={a} href={`/`} className="nav-link">{l}</a> 
               }

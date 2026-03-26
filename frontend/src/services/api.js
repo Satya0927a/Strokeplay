@@ -1,6 +1,6 @@
 import { getToken } from "@clerk/react";
 import axios from "axios";
-const url = "http://localhost:3000"
+const url = "https://strokeplay.onrender.com"
 const gettoken = async () => {
   const token = await getToken()
   return token

@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useClerk, UserButton, useUser } from "@clerk/react";
 import { fetchdraws, fetchusers } from "../services/api";
+import { Navigate } from "react-router-dom";
 
 /* ─── Animation variants ─── */
 const fadeUp = {
@@ -570,7 +571,10 @@ function Sidebar({ active, setActive, mobile, username }) {
 /* ═══════════════════════════════════════════
    ROOT ADMIN DASHBOARD
 ═══════════════════════════════════════════ */
-export default function AdminDashboard() {
+export default function AdminDashboard({userdata}) {
+  if(userdata.role != "admin"){
+    <Navigate to={'/'} replace/>
+  }
   const [active, setActive] = useState("users");
   const [mobileNav, setMobileNav] = useState(false);
   const { user } = useUser();
