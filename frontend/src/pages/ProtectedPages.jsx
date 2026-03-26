@@ -2,6 +2,7 @@ import { useUser } from "@clerk/react"
 import { useEffect } from "react"
 import { Link, Navigate } from "react-router-dom"
 import { Aftersignup, getuserdata } from "../services/api"
+import Loading from "../components/Loading"
 
 const ProtectedPages = ({ children, userdata, setuserdata }) => {
   const { isSignedIn, isLoaded, user } = useUser()
@@ -33,8 +34,8 @@ const ProtectedPages = ({ children, userdata, setuserdata }) => {
   }, [isLoaded, isSignedIn])
   if(!isLoaded){
     return(
-      <div>
-        clerk is loading...
+      <div className="flex justify-center items-center h-dvh">
+        <Loading text="loading clerk..."/>
       </div>
     )
   }
@@ -46,7 +47,9 @@ const ProtectedPages = ({ children, userdata, setuserdata }) => {
   }
   else if (!userdata) {
     return (
-      <div> User data loading...</div>
+      <div className="flex justify-center items-center h-dvh">
+        <Loading text="fetching user data, may take upto a min if server is turned down, please wait"/>
+      </div>
     )
   }
   else if (!userdata.plan) {
