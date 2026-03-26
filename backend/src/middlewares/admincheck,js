@@ -1,0 +1,28 @@
+const Usermodel = require('../models/Usermodel')
+
+const admincheck = async(req,res,next)=>{
+  try {
+    const userid = req.user.userid
+    const fetchuser = await Usermodel.findOne({userId:userid})
+    if(!fetchuser){
+      return res.status(403).send({
+        success:false,
+        message:"login is incomplete retry from the main website"
+      })
+    }
+    if(fetchuser.role !== "admin"){
+      return res.status(403).send({
+        success:false,
+        message:"forbidden only admin can access this route"
+      })
+    }
+    req.user = {
+      ...req.user,
+      role:fetchuser.role
+    }
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+module.exports = admincheck
