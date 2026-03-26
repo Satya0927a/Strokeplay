@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Apple, ChartArea, Heart, Home, LogOut, Plus, PlusIcon, Settings, Trophy, Upload } from "lucide-react";
 import { useClerk, UserButton, useUser } from "@clerk/react";
 import { fetchoverview, fetchscores, logscores } from "../services/api";
+import Loading from "../components/Loading";
 
 /* ─── Google Fonts + Base Styles ─── */
 
@@ -748,7 +749,9 @@ export default function Dashboard() {
   }, [])
   if (!userdash) {
     return (
-      <div>fetching user data from backend</div>
+      <div className="flex justify-center items-center h-dvh">
+        <Loading text="almost done"/>
+      </div>
     )
   }
   const renderSection = () => {
